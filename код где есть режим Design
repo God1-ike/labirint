@@ -1,0 +1,73 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class lab7 {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					lab7 window = new lab7();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public lab7() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		labirint panel = new labirint();
+		frame.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				switch(arg0.getKeyCode()) {
+				case KeyEvent.VK_LEFT:
+					panel.moveLeft();
+					break;
+				case KeyEvent.VK_RIGHT:
+					panel.moveRight();
+					break;
+				case KeyEvent.VK_UP:
+					panel.moveUp();
+					break;
+				case KeyEvent.VK_DOWN:
+					panel.moveDown();
+					break;
+				}
+			}
+		});
+		frame.setBounds(100, 100, 1045, 671);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		panel.load();
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(12, 13, 1003, 598);
+		frame.getContentPane().add(panel);
+	}
+
+}
